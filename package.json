@@ -1,7 +1,7 @@
 {
-  "name": "my-typescript-cli-project",
+  "name": "donkey-lang",
   "version": "1.0.0",
-  "description": "My TypeScript CLI project",
+  "description": "A CLI for a simple programming language",
   "main": "dist/index.js",
   "type": "module",
   "scripts": {
@@ -11,11 +11,11 @@
   },
   "keywords": [
     "typescript",
-    "cli",
-    "eslint",
-    "prettier"
+    "programming-language",
+    "interpreter",
+    "cli"
   ],
-  "author": "Your Name",
+  "author": "Joachim Reiß",
   "license": "MIT",
   "dependencies": {
     "inquirer": "^9.1.5",
