@@ -17,7 +17,7 @@ describe(tokenize, () => {
 
   it('should ignore whitespace completely', () => {
     const input = '                  ';
-    const result = [];
+    const result: any[] = [];
 
     expect(tokenize(input)).toEqual(result);
   });
