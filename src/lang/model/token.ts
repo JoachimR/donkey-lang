@@ -1,4 +1,4 @@
-import { isOpeningParenthesis } from '../identify';
+import { isOpeningParenthesis } from '../character-guards';
 import { ClosingParenthesis, Letter, OpeningParenthesis } from './symbol';
 
 export type NameToken = {

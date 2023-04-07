@@ -1,16 +1,16 @@
 import { ClosingParenthesis, Letter, OpeningParenthesis } from './model/symbol';
 
-const LETTER = /[a-zA-Z]/;
-const WHITESPACE = /\s+/;
-const NUMBER = /^[0-9]+$/;
-const OPERATORS = ['+', '-', '*', '/', '%'];
+const letterRegex = /[a-zA-Z]/;
+const whiteSpaceRegex = /\s+/;
+const numberRegex = /^[0-9]+$/;
+const operators = ['+', '-', '*', '/', '%'];
 
 export const isLetter = (character: string): character is Letter =>
-  LETTER.test(character);
+  letterRegex.test(character);
 
-export const isWhitespace = (character: string) => WHITESPACE.test(character);
+export const isWhitespace = (character: string) => whiteSpaceRegex.test(character);
 
-export const isNumber = (character: string) => NUMBER.test(character);
+export const isNumber = (character: string) => numberRegex.test(character);
 
 export const isOpeningParenthesis = (
   character: string
@@ -27,4 +27,4 @@ export const isParenthesis = (
 
 export const isQuote = (character: string) => character === '"';
 
-export const isOperator = (character: string) => OPERATORS.includes(character);
+export const isOperator = (character: string) => operators.includes(character);

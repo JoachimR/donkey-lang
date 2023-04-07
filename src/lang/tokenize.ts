@@ -1,11 +1,10 @@
 import {
   isLetter,
   isNumber,
-  isOpeningParenthesis,
   isParenthesis,
   isQuote,
   isWhitespace,
-} from './identify';
+} from './character-guards';
 import { Letter } from './model/symbol';
 import {
   createNameToken,

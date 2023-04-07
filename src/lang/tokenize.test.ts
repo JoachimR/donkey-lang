@@ -21,7 +21,6 @@ describe(tokenize, () => {
     expect(tokenize(input)).toEqual([]);
   });
 
-  // Exercise 1 - Begin
   it('should correctly tokenize a single digit', () => {
     const input = '2';
     const result = [{ type: 'Number', value: 2 }];
