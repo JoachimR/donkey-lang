@@ -1,8 +1,10 @@
 # Donkey Programming Language
 
-# WIP
+Donkey is a simple programming language designed for educational purposes.
 
-Donkey is a simple programming language designed for educational purposes. 
+[Inspired by dropbear](https://github.com/stevekinney/dropbear)
+
+# WIP
 
 ## Getting Started
 
@@ -14,5 +16,3 @@ To use Donkey, you'll need to install the Donkey compiler and runtime. You can d
 4. Run the program: `npm run start`
 
 This will compile your Donkey program to JavaScript and run it using the Node.js runtime.
-
-
