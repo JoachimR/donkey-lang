@@ -1,20 +1,18 @@
 import inquirer from 'inquirer';
+import { parseAndEvaluate } from './parse-and-evaluate.js';
+import { logError } from './utils.js';
 
-async function promptName() {
-  const { name } = await inquirer.prompt({
-    type: 'input',
-    name: 'name',
-    message: 'What is your name?',
-  });
+const prompt = () =>
+  inquirer.prompt([{ name: 'code', type: 'input', message: '>' }]);
 
-  return name;
-}
+export const readEvalPrintLoop = async () => {
+  try {
+    const { code } = await prompt();
+    parseAndEvaluate(code);
+  } catch (error) {
+    logError(error);
+  }
+  readEvalPrintLoop();
+};
 
-async function run() {
-  const name = await promptName();
-
-  console.log(`Hello, ${name}!`);
-}
-
-run();
-
+readEvalPrintLoop();
