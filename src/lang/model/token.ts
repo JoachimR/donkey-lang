@@ -1,13 +1,16 @@
-import { Letter, OpeningParenthesis, ClosingParenthesis } from './symbols';
+import { isOpeningParenthesis } from '../identify';
+import { ClosingParenthesis, Letter, OpeningParenthesis } from './symbol';
 
 export type NameToken = {
   type: 'Name';
   value: Letter[];
 };
 
+type Open = 0;
+type Closed = 1;
 export type ParenthesisToken = {
   type: 'Parenthesis';
-  value: OpeningParenthesis | ClosingParenthesis;
+  kind: Open | Closed;
 };
 
 export type NumberToken = {
@@ -27,10 +30,10 @@ export const createNameToken = (value: NameToken['value']): NameToken => ({
   value,
 });
 export const createParenthesisToken = (
-  value: ParenthesisToken['value']
+  value: OpeningParenthesis | ClosingParenthesis
 ): ParenthesisToken => ({
   type: 'Parenthesis',
-  value,
+  kind: isOpeningParenthesis(value) ? 0 : 1,
 });
 export const createNumberToken = (
   value: NumberToken['value']

@@ -8,8 +8,8 @@ describe(tokenize, () => {
   it('should be able to tokenize a pair of parentheses', () => {
     const input = '()';
     const result = [
-      { type: 'Parenthesis', value: '(' },
-      { type: 'Parenthesis', value: ')' },
+      { type: 'Parenthesis', kind: 0 },
+      { type: 'Parenthesis', kind: 1 },
     ];
 
     expect(tokenize(input)).toEqual(result);
@@ -17,9 +17,8 @@ describe(tokenize, () => {
 
   it('should ignore whitespace completely', () => {
     const input = '                  ';
-    const result: any[] = [];
 
-    expect(tokenize(input)).toEqual(result);
+    expect(tokenize(input)).toEqual([]);
   });
 
   // Exercise 1 - Begin
@@ -34,10 +33,10 @@ describe(tokenize, () => {
     const input = '(1 2)';
 
     const result = [
-      { type: 'Parenthesis', value: '(' },
+      { type: 'Parenthesis', kind: 0 },
       { type: 'Number', value: 1 },
       { type: 'Number', value: 2 },
-      { type: 'Parenthesis', value: ')' },
+      { type: 'Parenthesis', kind: 1 },
     ];
 
     expect(tokenize(input)).toEqual(result);
@@ -47,38 +46,36 @@ describe(tokenize, () => {
     const input = '(a b)';
 
     const result = [
-      { type: 'Parenthesis', value: '(' },
-      { type: 'Name', value: 'a' },
-      { type: 'Name', value: 'b' },
-      { type: 'Parenthesis', value: ')' },
+      { type: 'Parenthesis', kind: 0 },
+      { type: 'Name', value: ['a'] },
+      { type: 'Name', value: ['b'] },
+      { type: 'Parenthesis', kind: 1 },
     ];
 
     expect(tokenize(input)).toEqual(result);
   });
-  // Exercise 1: End
 
   it('should be able to handle multiple-digit numbers', () => {
     const input = '(11 22)';
 
     const result = [
-      { type: 'Parenthesis', value: '(' },
+      { type: 'Parenthesis', kind: 0 },
       { type: 'Number', value: 11 },
       { type: 'Number', value: 22 },
-      { type: 'Parenthesis', value: ')' },
+      { type: 'Parenthesis', kind: 1 },
     ];
 
     expect(tokenize(input)).toEqual(result);
   });
 
-  // Exercise 2 Begin
   it('should correctly tokenize a simple expression', () => {
     const input = '(add 2 3)';
     const result = [
-      { type: 'Parenthesis', value: '(' },
-      { type: 'Name', value: 'add' },
+      { type: 'Parenthesis', kind: 0 },
+      { type: 'Name', value: ['a', 'd', 'd'] },
       { type: 'Number', value: 2 },
       { type: 'Number', value: 3 },
-      { type: 'Parenthesis', value: ')' },
+      { type: 'Parenthesis', kind: 1 },
     ];
 
     expect(tokenize(input)).toEqual(result);
@@ -87,25 +84,24 @@ describe(tokenize, () => {
   it('should ignore whitespace', () => {
     const input = '   (add    2 3)';
     const result = [
-      { type: 'Parenthesis', value: '(' },
-      { type: 'Name', value: 'add' },
+      { type: 'Parenthesis', kind: 0 },
+      { type: 'Name', value: ['a', 'd', 'd'] },
       { type: 'Number', value: 2 },
       { type: 'Number', value: 3 },
-      { type: 'Parenthesis', value: ')' },
+      { type: 'Parenthesis', kind: 1 },
     ];
 
     expect(tokenize(input)).toEqual(result);
   });
-  // Exercise 2 End
 
   it('should know about strings', () => {
     const input = '(log "hello" "world")';
     const result = [
-      { type: 'Parenthesis', value: '(' },
-      { type: 'Name', value: 'log' },
+      { type: 'Parenthesis', kind: 0 },
+      { type: 'Name', value: ['l', 'o', 'g'] },
       { type: 'String', value: 'hello' },
       { type: 'String', value: 'world' },
-      { type: 'Parenthesis', value: ')' },
+      { type: 'Parenthesis', kind: 1 },
     ];
 
     expect(tokenize(input)).toEqual(result);
