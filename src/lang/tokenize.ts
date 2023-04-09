@@ -1,80 +1,102 @@
+import { Letter, Token } from './model/token/token'
 import {
-  isLetter,
-  isNumber,
-  isParenthesis,
-  isQuote,
-  isWhitespace,
-} from './character-guards';
-import { Letter } from './model/symbol';
-import {
-  createNameToken,
+  createOpenToken,
+  createCloseToken,
   createNumberToken,
-  createParenthesisToken,
+  createNameToken,
   createStringToken,
-  Token,
-} from './model/token';
+} from './model/token/token-factory'
 
-export const tokenize = (code: string): Token[] => {
-  const tokens: Token[] = [];
-  let cursor = 0;
+export function tokenize(code: string): Token[] {
+  const tokens: Token[] = []
+  let cursor = 0
 
   while (cursor < code.length) {
-    const character = code[cursor];
+    const character = code[cursor]
 
-    if (isParenthesis(character)) {
-      tokens.push(createParenthesisToken(character));
-      cursor++;
-      continue;
+    if (isOpeningParenthesis(character)) {
+      tokens.push(createOpenToken())
+      cursor++
+      continue
+    }
+    if (isClosingParenthesis(character)) {
+      tokens.push(createCloseToken())
+      cursor++
+      continue
     }
 
     if (isWhitespace(character)) {
-      cursor++;
-      continue;
+      cursor++
+      continue
     }
 
     if (isNumber(character)) {
-      let number = character;
+      let number = character
 
       while (isNumber(code[++cursor])) {
-        number += code[cursor];
+        number += code[cursor]
       }
 
-      tokens.push(createNumberToken(parseInt(number)));
+      tokens.push(createNumberToken(parseInt(number)))
 
-      continue;
+      continue
     }
 
     if (isLetter(character)) {
-      const symbol: Letter[] = [character];
+      const letters: Letter[] = [character]
 
-      cursor++;
-      let nextCharacter = code[cursor];
+      cursor++
+      let nextCharacter = code[cursor]
       while (isLetter(nextCharacter)) {
-        symbol.push(nextCharacter);
-        cursor++;
-        nextCharacter = code[cursor];
+        letters.push(nextCharacter)
+        cursor++
+        nextCharacter = code[cursor]
       }
 
-      tokens.push(createNameToken(symbol));
+      tokens.push(createNameToken(letters))
 
-      continue;
+      continue
     }
 
     if (isQuote(character)) {
-      let string = '';
+      let string = ''
 
       while (!isQuote(code[++cursor])) {
-        string += code[cursor];
+        string += code[cursor]
       }
 
-      tokens.push(createStringToken(string));
+      tokens.push(createStringToken(string))
 
-      cursor++;
-      continue;
+      cursor++
+      continue
     }
 
-    throw new Error(`${character} is not valid`);
+    throw new Error(`${character} is not valid`)
   }
 
-  return tokens;
-};
+  return tokens
+}
+
+function isLetter(character: string): character is Letter {
+  return /[a-zA-Z]/.test(character)
+}
+
+function isWhitespace(character: string) {
+  return /\s+/.test(character)
+}
+
+function isNumber(character: string) {
+  return /^[0-9]+$/.test(character)
+}
+
+function isOpeningParenthesis(character: string) {
+  return character === '('
+}
+
+function isClosingParenthesis(character: string) {
+  return character === ')'
+}
+
+function isQuote(character: string) {
+  return character === '"'
+}

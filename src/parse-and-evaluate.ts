@@ -1,3 +1,5 @@
+import { tokenize } from "./lang/tokenize";
+
 export function parseAndEvaluate(code: string) {
   if (!code) {
     return;
@@ -6,5 +8,6 @@ export function parseAndEvaluate(code: string) {
   if (!text) {
     return;
   }
-  console.log(code);
+  const tokens = tokenize(text);
+  console.log(tokens)
 }
