@@ -1,11 +1,11 @@
-import { Letter, Token } from './model/token/token'
+import { Letter, Token } from './model/token/token.js'
 import {
   createOpenToken,
   createCloseToken,
   createNumberToken,
   createNameToken,
   createStringToken,
-} from './model/token/token-factory'
+} from './model/token/token-factory.js'
 
 export function tokenize(code: string): Token[] {
   const tokens: Token[] = []

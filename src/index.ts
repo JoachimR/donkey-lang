@@ -1,3 +1,3 @@
-import { readEvalPrintLoop } from './read-eval-print-loop'
+import { readEvalPrintLoop } from './read-eval-print-loop.js'
 
 readEvalPrintLoop()
